@@ -1,0 +1,127 @@
+[
+  {
+    "name": "bug",
+    "color": "d73a4a",
+    "description": "기대한 동작과 다른 결함"
+  },
+  {
+    "name": "documentation",
+    "color": "0075ca",
+    "description": "문서 작성·수정"
+  },
+  {
+    "name": "duplicate",
+    "color": "cfd3d7",
+    "description": "기존 이슈·PR과 중복"
+  },
+  {
+    "name": "enhancement",
+    "color": "a2eeef",
+    "description": "신규 기능과 개선"
+  },
+  {
+    "name": "good first issue",
+    "color": "7057ff",
+    "description": "작고 명확한 첫 기여 작업"
+  },
+  {
+    "name": "help wanted",
+    "color": "008672",
+    "description": "도움이 필요한 작업"
+  },
+  {
+    "name": "invalid",
+    "color": "e4e669",
+    "description": "범위 밖 또는 유효하지 않은 이슈"
+  },
+  {
+    "name": "question",
+    "color": "d876e3",
+    "description": "추가 설명·정보 필요"
+  },
+  {
+    "name": "wontfix",
+    "color": "ffffff",
+    "description": "사유를 기록하고 진행하지 않는 작업"
+  },
+  {
+    "name": "planning",
+    "color": "5319e7",
+    "description": "프로젝트 기획·구조·환경"
+  },
+  {
+    "name": "data",
+    "color": "0e8a16",
+    "description": "거래·문서 데이터 처리"
+  },
+  {
+    "name": "ml",
+    "color": "006b75",
+    "description": "탐지 모델과 고객 행동 분석"
+  },
+  {
+    "name": "retrieval",
+    "color": "1d76db",
+    "description": "근거 검색·청킹·재정렬"
+  },
+  {
+    "name": "llm",
+    "color": "7057ff",
+    "description": "언어 모델·보고서·에이전트"
+  },
+  {
+    "name": "backend",
+    "color": "0052cc",
+    "description": "서버·API·상태 관리"
+  },
+  {
+    "name": "frontend",
+    "color": "d876e3",
+    "description": "사용자 화면·조작 흐름"
+  },
+  {
+    "name": "evaluation",
+    "color": "fbca04",
+    "description": "평가 데이터·측정·실패 분석"
+  },
+  {
+    "name": "testing",
+    "color": "bfdadc",
+    "description": "자동 테스트·회귀 검증"
+  },
+  {
+    "name": "devops",
+    "color": "006b75",
+    "description": "CI·배포·관측·복구"
+  },
+  {
+    "name": "security",
+    "color": "b60205",
+    "description": "권한·개인정보·악성 지시 대응"
+  },
+  {
+    "name": "performance",
+    "color": "f9d0c4",
+    "description": "지연·처리량·비용"
+  },
+  {
+    "name": "research",
+    "color": "c5def5",
+    "description": "비교 실험·선택 확장"
+  },
+  {
+    "name": "priority:P0",
+    "color": "b60205",
+    "description": "첫 핵심 흐름에 필요한 작업"
+  },
+  {
+    "name": "priority:P1",
+    "color": "fbca04",
+    "description": "핵심 서비스 비교·완성·공개"
+  },
+  {
+    "name": "priority:P2",
+    "color": "c5def5",
+    "description": "핵심 평가 이후 선택 확장"
+  }
+]
