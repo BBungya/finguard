@@ -63,6 +63,25 @@ foreach ($item in $work) {
     $issueObjects += [ordered]@{ key=$item.key;title=$item.title;body=$body;labels=@($labels | Select-Object -Unique);depends_on=$item.depends_on;optional=$item.optional }
     $document += @('', "<a id=`"fg-$($item.key)`"></a>", '', "## FG-$($item.key) $($item.title)", '', ('라벨: ' + ($labels -join ', ')), '', $body)
 }
+$documentText = $document -join "`n"
+$mapPath = Join-Path $repoRoot 'docs\issue-map.json'
+if (Test-Path -LiteralPath $mapPath) {
+    $issueMap = Get-Content -LiteralPath $mapPath -Raw | ConvertFrom-Json
+    foreach ($issue in $issueObjects) {
+        $oldBody = $issue.body
+        $mapped = $issueMap | Where-Object key -eq $issue.key
+        if (-not $mapped) { throw ('Missing published issue mapping: ' + $issue.key) }
+        $issue.body = $issue.body.Replace("- 로컬 작업 ID: FG-$($issue.key). 실제 이슈 번호는 게시 후 매핑한다.", "- 작업 ID: FG-$($issue.key). GitHub 이슈: [#$($mapped.number)]($($mapped.url)).")
+        foreach ($depKey in $issue.depends_on) {
+            $dep = $issueMap | Where-Object key -eq $depKey
+            if (-not $dep) { throw ('Missing dependency mapping: ' + $depKey) }
+            $issue.body = $issue.body.Replace("[FG-$depKey](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-$depKey)", "[#$($dep.number) — FG-$depKey]($($dep.url))")
+        }
+        $documentText = $documentText.Replace($oldBody, $issue.body)
+    }
+    $documentText = $documentText.Replace('# FinGuard 개발 이슈 초안', '# FinGuard 개발 작업과 이슈')
+    $documentText = $documentText.Replace('상태: GitHub 게시 전 로컬 초안. FG-01~FG-24는 작업 ID이며 실제 GitHub 이슈 번호가 아니다.', '상태: GitHub 이슈 24개 게시 완료. FG 작업 ID별 실제 이슈 링크는 아래에 연결했다. 구현은 미착수다.')
+}
 $issueObjects | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $repoRoot 'docs\issue-seed.json') -Encoding utf8
-$document -join "`n" | Set-Content -LiteralPath (Join-Path $repoRoot 'docs\DEVELOPMENT_ISSUES.md') -Encoding utf8
+$documentText | Set-Content -LiteralPath (Join-Path $repoRoot 'docs\DEVELOPMENT_ISSUES.md') -Encoding utf8
 Write-Output ('Prepared ' + $issueObjects.Count + ' local issues and ' + $labelObjects.Count + ' labels. No GitHub changes.')

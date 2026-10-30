@@ -11,11 +11,11 @@
 <p>
   <a href="#overview">소개</a> · <a href="#features">목표 기능</a> ·
   <a href="#getting-started">시작하기</a> · <a href="#evaluation">평가</a> ·
-  <a href="#roadmap">로드맵</a> · <a href="docs/DEVELOPMENT_ISSUES.md">개발 이슈 초안</a>
+  <a href="#roadmap">로드맵</a> · <a href="https://github.com/BBungya/finguard/issues">개발 이슈</a>
 </p>
 </div>
 
-> **현재 상태: 로컬 기획·개발 준비 단계.** GitHub 생성·게시 전입니다. 실행 코드·학습 모델·배포 서비스는 없으며 아래 기능과 기술은 구현 계획입니다. 결과는 실제 측정 후 공개합니다.
+> **현재 상태: 기획·개발 준비 단계.** 공개 저장소에 문서·템플릿·개발 이슈 24개를 게시했습니다. 실행 코드·학습 모델·배포 서비스는 없으며 아래 기능과 기술은 구현 계획입니다. 결과는 실제 측정 후 공개합니다.
 
 <a id="overview"></a>
 
@@ -57,7 +57,10 @@ LLM은 조사 근거를 모아 보고서 초안을 작성합니다. 거래 점�
 | 문서·검색 | 지침 수집·파싱·청킹, 키워드·벡터·하이브리드 비교 | [FG-11~12](docs/DEVELOPMENT_ISSUES.md#fg-11) |
 | 보고서·에이전트 | 도구 호출, 수치·출처 검증, 호출 제한과 근거 추적 | [FG-13~14](docs/DEVELOPMENT_ISSUES.md#fg-13) |
 | 평가·운영 | 통합 평가, 테스트·CI, 접근 권한, 장애·복구, 실패 개선 | [FG-15~19](docs/DEVELOPMENT_ISSUES.md#fg-15) |
-| 선택 확장 | 연합학습, 계좌 관계·AML, 성능 최적화, 참고 뉴스 | [FG-21~24](docs/DEVELOPMENT_ISSUES.md#fg-21)
+| 선택 확장 | 연합학습, 계좌 관계·AML, 성능 최적화, 참고 뉴스 | [FG-21~24](docs/DEVELOPMENT_ISSUES.md#fg-21) |
+
+FG 작업 ID와 실제 GitHub 이슈의 대응은 [개발 작업 목록](docs/DEVELOPMENT_ISSUES.md)에서 확인할 수 있습니다.
+
 ## 설계의 핵심
 
 - **거래 단위 예측:** 학습과 API의 예측 대상을 현재 거래의 `is_fraud`로 통일합니다.
@@ -81,6 +84,12 @@ LLM은 조사 근거를 모아 보고서 초안을 작성합니다. 거래 점�
 
 <a id="getting-started"></a>
 
+## 시작하기
+
+현재는 문서와 GitHub 운영용 구성이 있습니다. [개발 환경 구성 #1](https://github.com/BBungya/finguard/issues/1)에서 Python 버전·의존성·설치와 실행 방법을 확정합니다. 이후 실제로 검증한 명령을 이 절에 추가합니다.
+
+지금은 [기획서](docs/PROJECT_PLAN.md) → [개발 이슈](docs/DEVELOPMENT_ISSUES.md) → [작업 규칙](docs/WORKFLOW.md) 순서로 확인할 수 있습니다. 아래 명령은 실제 이슈 번호 매핑을 유지하며 로컬 이슈·라벨 문서만 다시 생성합니다. 네트워크 접근이나 GitHub 게시를 수행하지 않습니다.
+
 ```powershell
 pwsh -File ./tools/prepare_repository.ps1
 ```
@@ -100,6 +109,7 @@ finguard/
 │   ├── PROJECT_PLAN.md
 │   ├── DEVELOPMENT_ISSUES.md
 │   ├── WORKFLOW.md
+│   ├── issue-map.json           # FG 작업 ID와 실제 GitHub 이슈의 대응
 │   └── issue-seed.json
 └── tools/
     └── prepare_repository.ps1   # 로컬 초안 생성
@@ -110,6 +120,8 @@ API·ML·검색·화면·평가 코드는 구현할 때 추가합니다.
 </details>
 
 ## 사용 시나리오
+
+다음은 구현 후 검증할 시나리오이며 실제 실행 결과가 아닙니다.
 
 | 요청·상황 | 기대하는 동작 |
 |---|---|
@@ -134,6 +146,8 @@ API·ML·검색·화면·평가 코드는 구현할 때 추가합니다.
 
 ## 개발 로드맵
 
+개인 개발 8주를 가정한 계획이며 실제 가용 시간과 데이터 상태에 따라 조정합니다.
+
 | 계획 시점 | 목표 | 작업 |
 |---|---|---|
 | 1~2주 | 구조·데이터·재생·시점별 피처·평가 분할 | [FG-01~05](docs/DEVELOPMENT_ISSUES.md#fg-01) |
@@ -147,6 +161,12 @@ API·ML·검색·화면·평가 코드는 구현할 때 추가합니다.
 
 핵심·완성 작업 20개와 선택 확장 4개입니다. 상세 작업에는 **목적·할 일·완료 조건·산출물·선행 작업·작업 결과**를 기록합니다. 실제 순서는 [각 작업의 선행 조건](docs/DEVELOPMENT_ISSUES.md)을 따릅니다.
 
+## 이슈·PR 운영
+
+`bug`·`enhancement`·`documentation` 등 기본 라벨을 유지하고, `data`·`ml`·`retrieval`·`llm`·`backend`·`evaluation` 등의 분야와 `priority:P0/P1/P2`를 조합합니다. 진행 상태를 라벨로 중복 관리하지 않습니다.
+
+개발 작업·버그·기능·유지보수·실험의 [이슈 템플릿](.github/ISSUE_TEMPLATE)과 [PR 템플릿](.github/pull_request_template.md)을 기본 브랜치에 게시했습니다. 브랜치·커밋·PR·라벨 기준은 [개발 규칙](docs/WORKFLOW.md)에 정리했습니다.
+
 ## 데이터와 확장 범위
 
 첫 버전은 교육 저장소의 카드 거래 데이터 구조를 출발점으로 합니다. 원 데이터의 출처·생성 방식·이용 및 재배포 조건을 먼저 확인하고, 원본 데이터·개인정보·모델 파일·API 키는 저장소에 포함하지 않습니다. 합성 시연 데이터와 모델 성능 평가 데이터를 구분합니다.
@@ -158,3 +178,23 @@ API·ML·검색·화면·평가 코드는 구현할 때 추가합니다.
 하나 청년 금융인재 양성 프로젝트의 [교육 저장소](https://github.com/BBungya/hana_power_on)에서 학습한 데이터 분석·FDS·RAG·에이전트 개념을 하나의 서비스로 발전시키는 프로젝트입니다. 교육 저장소의 공식 후속 서비스나 금융기관과의 제휴 프로젝트를 뜻하지 않습니다. 교육 코드 재사용 전 라이선스와 이용 범위를 확인합니다.
 
 금융 업무 에이전트, 금융사기 대응, AI 안전성·신뢰성 평가라는 최근 흐름과의 연결 근거는 [기획서의 동향 분석](docs/PROJECT_PLAN.md#11-최근-금융-itai-흐름과-프로젝트의-연결)에 정리했습니다.
+
+## 실행 및 결과
+
+현재 실행 가능한 애플리케이션과 측정 결과는 없습니다. 첫 구현 완료 후 환경 설정, 실행 명령, 테스트 방법, 데모 링크와 실험 결과를 추가합니다.
+
+## 참고 자료와 이용 조건
+
+- [Semiconductor Docs RAG](https://github.com/BBungya/semiconductor-docs-rag): README 탐색 구성과 이슈의 선행 작업·산출물·결과 기록 방식.
+- [GitHub 기본 라벨](https://itpro.tistory.com/207): 기본 유형과 사용자 정의 라벨의 구분.
+- [Issue 및 PR Template](https://soo-develop.tistory.com/43): 저장소 안에서 공통 양식을 관리하는 접근.
+
+참고 자료의 구조를 FinGuard의 거래·탐지·조사·평가 흐름에 맞게 재작성했습니다. 코드 라이선스는 미정이며 LICENSE 파일은 아직 없습니다. 데이터·문서는 각 원저작자의 이용 조건을 확인합니다.
+
+## 변경 내역
+
+| 날짜 | 변경 |
+|---|---|
+| 2026-10-30 | 금융 AI 기획서와 README·개발 작업 초안 작성 |
+| 2026-10-31 | 참고 자료를 반영해 24개 작업·의존 관계·템플릿·라벨 구성 |
+| 2026-10-31 | 공개 저장소에 문서·템플릿·라벨과 이슈 24개 게시, 실제 이슈 링크 연결 |

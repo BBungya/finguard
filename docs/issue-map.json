@@ -1,0 +1,146 @@
+[
+  {
+    "key": "01",
+    "number": 1,
+    "title": "[기획] 개발 구조·환경·작업 규칙 확정",
+    "url": "https://github.com/BBungya/finguard/issues/1"
+  },
+  {
+    "key": "02",
+    "number": 2,
+    "title": "[데이터] 거래 데이터 출처·라벨·이용 조건 확인",
+    "url": "https://github.com/BBungya/finguard/issues/2"
+  },
+  {
+    "key": "03",
+    "number": 3,
+    "title": "[수집] 거래 스키마 검증·시간순 재생 구현",
+    "url": "https://github.com/BBungya/finguard/issues/3"
+  },
+  {
+    "key": "04",
+    "number": 4,
+    "title": "[피처] 과거 이력 계산과 학습·추론 일치 검증",
+    "url": "https://github.com/BBungya/finguard/issues/4"
+  },
+  {
+    "key": "05",
+    "number": 5,
+    "title": "[평가 데이터] ML 시간 분할과 조사 예산 고정",
+    "url": "https://github.com/BBungya/finguard/issues/5"
+  },
+  {
+    "key": "06",
+    "number": 6,
+    "title": "[기준선] 규칙·로지스틱 회귀와 탐지 평가",
+    "url": "https://github.com/BBungya/finguard/issues/6"
+  },
+  {
+    "key": "07",
+    "number": 7,
+    "title": "[모델] 랜덤포레스트·XGBoost와 오류 분석",
+    "url": "https://github.com/BBungya/finguard/issues/7"
+  },
+  {
+    "key": "08",
+    "number": 8,
+    "title": "[행동 분석] 군집·이상 점수 제거 실험",
+    "url": "https://github.com/BBungya/finguard/issues/8"
+  },
+  {
+    "key": "09",
+    "number": 9,
+    "title": "[거래 API] 점수·고객 상태·멱등성 구현",
+    "url": "https://github.com/BBungya/finguard/issues/9"
+  },
+  {
+    "key": "10",
+    "number": 10,
+    "title": "[조사 화면] 사건 상세·보고서 상태·검토 이력",
+    "url": "https://github.com/BBungya/finguard/issues/10"
+  },
+  {
+    "key": "11",
+    "number": 11,
+    "title": "[문서] 조사 지침 출처·파싱·청킹·버전 관리",
+    "url": "https://github.com/BBungya/finguard/issues/11"
+  },
+  {
+    "key": "12",
+    "number": 12,
+    "title": "[검색] 키워드·벡터·하이브리드 기준 비교",
+    "url": "https://github.com/BBungya/finguard/issues/12"
+  },
+  {
+    "key": "13",
+    "number": 13,
+    "title": "[보고서] 구조화 초안·수치·인용 검증",
+    "url": "https://github.com/BBungya/finguard/issues/13"
+  },
+  {
+    "key": "14",
+    "number": 14,
+    "title": "[에이전트] 제한된 도구·실행 흐름·AI 호출 관리",
+    "url": "https://github.com/BBungya/finguard/issues/14"
+  },
+  {
+    "key": "15",
+    "number": 15,
+    "title": "[평가] 보고서·에이전트 통합 평가셋과 실행기",
+    "url": "https://github.com/BBungya/finguard/issues/15"
+  },
+  {
+    "key": "16",
+    "number": 16,
+    "title": "[품질] 회귀 테스트와 GitHub Actions",
+    "url": "https://github.com/BBungya/finguard/issues/16"
+  },
+  {
+    "key": "17",
+    "number": 17,
+    "title": "[보안] 사건 권한·개인정보·문서 내 악성 지시 검증",
+    "url": "https://github.com/BBungya/finguard/issues/17"
+  },
+  {
+    "key": "18",
+    "number": 18,
+    "title": "[운영] Docker·관측·장애·백업 복구",
+    "url": "https://github.com/BBungya/finguard/issues/18"
+  },
+  {
+    "key": "19",
+    "number": 19,
+    "title": "[개선] 실패 분류·가설·한 요소씩 비교",
+    "url": "https://github.com/BBungya/finguard/issues/19"
+  },
+  {
+    "key": "20",
+    "number": 20,
+    "title": "[포트폴리오] README·데모·측정 결과·기여 정리",
+    "url": "https://github.com/BBungya/finguard/issues/20"
+  },
+  {
+    "key": "21",
+    "number": 21,
+    "title": "[확장·연합학습] 기관별 분할과 협력 효과 실험",
+    "url": "https://github.com/BBungya/finguard/issues/21"
+  },
+  {
+    "key": "22",
+    "number": 22,
+    "title": "[확장·AML] 계좌 관계 데이터와 그래프 조사",
+    "url": "https://github.com/BBungya/finguard/issues/22"
+  },
+  {
+    "key": "23",
+    "number": 23,
+    "title": "[확장·성능] 대기열·배치·캐시·부하 최적화",
+    "url": "https://github.com/BBungya/finguard/issues/23"
+  },
+  {
+    "key": "24",
+    "number": 24,
+    "title": "[확장·뉴스] 금융사기 참고 뉴스 수집·최신성 관리",
+    "url": "https://github.com/BBungya/finguard/issues/24"
+  }
+]

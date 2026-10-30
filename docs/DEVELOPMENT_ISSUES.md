@@ -1,8 +1,8 @@
-# FinGuard 개발 이슈 초안
+# FinGuard 개발 작업과 이슈
 
 최종 수정: 2026-10-31 (KST)
 
-상태: GitHub 게시 전 로컬 초안. FG-01~FG-24는 작업 ID이며 실제 GitHub 이슈 번호가 아니다.
+상태: GitHub 이슈 24개 게시 완료. FG 작업 ID별 실제 이슈 링크는 아래에 연결했다. 구현은 미착수다.
 
 핵심·완성 작업 20개와 선택 확장 4개로 구성한다. 개별 이슈의 선행 작업을 우선하며, 8주는 일정 가정이다.
 
@@ -65,7 +65,7 @@ pyproject.toml, 잠금 파일, .env.example, docs/architecture.md
 ## 일정·범위
 
 - 계획 시점: 1주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-01. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-01. GitHub 이슈: [#1](https://github.com/BBungya/finguard/issues/1).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -100,12 +100,12 @@ data/manifests, docs/data_card.md
 
 ## 선행 작업
 
-- [FG-01](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-01)
+- [#1 — FG-01](https://github.com/BBungya/finguard/issues/1)
 
 ## 일정·범위
 
 - 계획 시점: 1주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-02. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-02. GitHub 이슈: [#2](https://github.com/BBungya/finguard/issues/2).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -140,12 +140,12 @@ data/manifests, docs/data_card.md
 
 ## 선행 작업
 
-- [FG-02](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-02)
+- [#2 — FG-02](https://github.com/BBungya/finguard/issues/2)
 
 ## 일정·범위
 
 - 계획 시점: 1~2주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-03. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-03. GitHub 이슈: [#3](https://github.com/BBungya/finguard/issues/3).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -180,12 +180,12 @@ data/manifests, docs/data_card.md
 
 ## 선행 작업
 
-- [FG-03](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-03)
+- [#3 — FG-03](https://github.com/BBungya/finguard/issues/3)
 
 ## 일정·범위
 
 - 계획 시점: 2주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-04. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-04. GitHub 이슈: [#4](https://github.com/BBungya/finguard/issues/4).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -220,13 +220,13 @@ ML 분할 설정, 평가 명세, 분포 보고서
 
 ## 선행 작업
 
-- [FG-02](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-02)
-- [FG-04](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-04)
+- [#2 — FG-02](https://github.com/BBungya/finguard/issues/2)
+- [#4 — FG-04](https://github.com/BBungya/finguard/issues/4)
 
 ## 일정·범위
 
 - 계획 시점: 2주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-05. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-05. GitHub 이슈: [#5](https://github.com/BBungya/finguard/issues/5).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -261,13 +261,13 @@ ML 분할 설정, 평가 명세, 분포 보고서
 
 ## 선행 작업
 
-- [FG-04](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-04)
-- [FG-05](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-05)
+- [#4 — FG-04](https://github.com/BBungya/finguard/issues/4)
+- [#5 — FG-05](https://github.com/BBungya/finguard/issues/5)
 
 ## 일정·범위
 
 - 계획 시점: 2주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-06. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-06. GitHub 이슈: [#6](https://github.com/BBungya/finguard/issues/6).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -302,12 +302,12 @@ ML 분할 설정, 평가 명세, 분포 보고서
 
 ## 선행 작업
 
-- [FG-06](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-06)
+- [#6 — FG-06](https://github.com/BBungya/finguard/issues/6)
 
 ## 일정·범위
 
 - 계획 시점: 3주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-07. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-07. GitHub 이슈: [#7](https://github.com/BBungya/finguard/issues/7).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -342,12 +342,12 @@ ML 분할 설정, 평가 명세, 분포 보고서
 
 ## 선행 작업
 
-- [FG-07](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-07)
+- [#7 — FG-07](https://github.com/BBungya/finguard/issues/7)
 
 ## 일정·범위
 
 - 계획 시점: 3주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-08. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-08. GitHub 이슈: [#8](https://github.com/BBungya/finguard/issues/8).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -382,14 +382,14 @@ API 명세, 저장 스키마, 통합·동시 요청 검증
 
 ## 선행 작업
 
-- [FG-03](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-03)
-- [FG-04](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-04)
-- [FG-06](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-06)
+- [#3 — FG-03](https://github.com/BBungya/finguard/issues/3)
+- [#4 — FG-04](https://github.com/BBungya/finguard/issues/4)
+- [#6 — FG-06](https://github.com/BBungya/finguard/issues/6)
 
 ## 일정·범위
 
 - 계획 시점: 4주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-09. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-09. GitHub 이슈: [#9](https://github.com/BBungya/finguard/issues/9).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -424,12 +424,12 @@ API 명세, 저장 스키마, 통합·동시 요청 검증
 
 ## 선행 작업
 
-- [FG-09](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-09)
+- [#9 — FG-09](https://github.com/BBungya/finguard/issues/9)
 
 ## 일정·범위
 
 - 계획 시점: 4주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-10. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-10. GitHub 이슈: [#10](https://github.com/BBungya/finguard/issues/10).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -464,13 +464,13 @@ API 명세, 저장 스키마, 통합·동시 요청 검증
 
 ## 선행 작업
 
-- [FG-01](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-01)
-- [FG-02](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-02)
+- [#1 — FG-01](https://github.com/BBungya/finguard/issues/1)
+- [#2 — FG-02](https://github.com/BBungya/finguard/issues/2)
 
 ## 일정·범위
 
 - 계획 시점: 5주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-11. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-11. GitHub 이슈: [#11](https://github.com/BBungya/finguard/issues/11).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -505,12 +505,12 @@ API 명세, 저장 스키마, 통합·동시 요청 검증
 
 ## 선행 작업
 
-- [FG-11](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-11)
+- [#11 — FG-11](https://github.com/BBungya/finguard/issues/11)
 
 ## 일정·범위
 
 - 계획 시점: 5주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-12. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-12. GitHub 이슈: [#12](https://github.com/BBungya/finguard/issues/12).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -545,14 +545,14 @@ API 명세, 저장 스키마, 통합·동시 요청 검증
 
 ## 선행 작업
 
-- [FG-09](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-09)
-- [FG-10](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-10)
-- [FG-12](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-12)
+- [#9 — FG-09](https://github.com/BBungya/finguard/issues/9)
+- [#10 — FG-10](https://github.com/BBungya/finguard/issues/10)
+- [#12 — FG-12](https://github.com/BBungya/finguard/issues/12)
 
 ## 일정·범위
 
 - 계획 시점: 6주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-13. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-13. GitHub 이슈: [#13](https://github.com/BBungya/finguard/issues/13).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -587,12 +587,12 @@ API 명세, 저장 스키마, 통합·동시 요청 검증
 
 ## 선행 작업
 
-- [FG-13](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-13)
+- [#13 — FG-13](https://github.com/BBungya/finguard/issues/13)
 
 ## 일정·범위
 
 - 계획 시점: 6주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-14. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-14. GitHub 이슈: [#14](https://github.com/BBungya/finguard/issues/14).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -627,15 +627,15 @@ evals 데이터·스키마, 평가 실행기, 결과 보고서
 
 ## 선행 작업
 
-- [FG-05](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-05)
-- [FG-11](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-11)
-- [FG-13](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-13)
-- [FG-14](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-14)
+- [#5 — FG-05](https://github.com/BBungya/finguard/issues/5)
+- [#11 — FG-11](https://github.com/BBungya/finguard/issues/11)
+- [#13 — FG-13](https://github.com/BBungya/finguard/issues/13)
+- [#14 — FG-14](https://github.com/BBungya/finguard/issues/14)
 
 ## 일정·범위
 
 - 계획 시점: 6~7주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-15. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-15. GitHub 이슈: [#15](https://github.com/BBungya/finguard/issues/15).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -670,14 +670,14 @@ tests, .github/workflows, CI 실행 안내
 
 ## 선행 작업
 
-- [FG-09](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-09)
-- [FG-13](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-13)
-- [FG-14](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-14)
+- [#9 — FG-09](https://github.com/BBungya/finguard/issues/9)
+- [#13 — FG-13](https://github.com/BBungya/finguard/issues/13)
+- [#14 — FG-14](https://github.com/BBungya/finguard/issues/14)
 
 ## 일정·범위
 
 - 계획 시점: 7주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-16. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-16. GitHub 이슈: [#16](https://github.com/BBungya/finguard/issues/16).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -712,13 +712,13 @@ tests, .github/workflows, CI 실행 안내
 
 ## 선행 작업
 
-- [FG-10](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-10)
-- [FG-14](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-14)
+- [#10 — FG-10](https://github.com/BBungya/finguard/issues/10)
+- [#14 — FG-14](https://github.com/BBungya/finguard/issues/14)
 
 ## 일정·범위
 
 - 계획 시점: 7주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-17. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-17. GitHub 이슈: [#17](https://github.com/BBungya/finguard/issues/17).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -753,15 +753,15 @@ Compose, 운영 안내, 장애·복구·기초 부하 결과
 
 ## 선행 작업
 
-- [FG-10](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-10)
-- [FG-14](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-14)
-- [FG-16](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-16)
-- [FG-17](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-17)
+- [#10 — FG-10](https://github.com/BBungya/finguard/issues/10)
+- [#14 — FG-14](https://github.com/BBungya/finguard/issues/14)
+- [#16 — FG-16](https://github.com/BBungya/finguard/issues/16)
+- [#17 — FG-17](https://github.com/BBungya/finguard/issues/17)
 
 ## 일정·범위
 
 - 계획 시점: 7~8주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-18. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-18. GitHub 이슈: [#18](https://github.com/BBungya/finguard/issues/18).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -796,14 +796,14 @@ Compose, 운영 안내, 장애·복구·기초 부하 결과
 
 ## 선행 작업
 
-- [FG-07](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-07)
-- [FG-08](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-08)
-- [FG-15](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-15)
+- [#7 — FG-07](https://github.com/BBungya/finguard/issues/7)
+- [#8 — FG-08](https://github.com/BBungya/finguard/issues/8)
+- [#15 — FG-15](https://github.com/BBungya/finguard/issues/15)
 
 ## 일정·범위
 
 - 계획 시점: 7~8주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-19. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-19. GitHub 이슈: [#19](https://github.com/BBungya/finguard/issues/19).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -838,13 +838,13 @@ README, 시연 영상, 실험·설계 문서, 소개 문장
 
 ## 선행 작업
 
-- [FG-18](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-18)
-- [FG-19](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-19)
+- [#18 — FG-18](https://github.com/BBungya/finguard/issues/18)
+- [#19 — FG-19](https://github.com/BBungya/finguard/issues/19)
 
 ## 일정·범위
 
 - 계획 시점: 8주. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-20. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-20. GitHub 이슈: [#20](https://github.com/BBungya/finguard/issues/20).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -879,12 +879,12 @@ README, 시연 영상, 실험·설계 문서, 소개 문장
 
 ## 선행 작업
 
-- [FG-19](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-19)
+- [#19 — FG-19](https://github.com/BBungya/finguard/issues/19)
 
 ## 일정·범위
 
 - 계획 시점: 핵심 평가 이후. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-21. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-21. GitHub 이슈: [#21](https://github.com/BBungya/finguard/issues/21).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -919,13 +919,13 @@ README, 시연 영상, 실험·설계 문서, 소개 문장
 
 ## 선행 작업
 
-- [FG-02](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-02)
-- [FG-19](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-19)
+- [#2 — FG-02](https://github.com/BBungya/finguard/issues/2)
+- [#19 — FG-19](https://github.com/BBungya/finguard/issues/19)
 
 ## 일정·범위
 
 - 계획 시점: 데이터 확보 이후. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-22. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-22. GitHub 이슈: [#22](https://github.com/BBungya/finguard/issues/22).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -960,14 +960,14 @@ README, 시연 영상, 실험·설계 문서, 소개 문장
 
 ## 선행 작업
 
-- [FG-17](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-17)
-- [FG-18](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-18)
-- [FG-19](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-19)
+- [#17 — FG-17](https://github.com/BBungya/finguard/issues/17)
+- [#18 — FG-18](https://github.com/BBungya/finguard/issues/18)
+- [#19 — FG-19](https://github.com/BBungya/finguard/issues/19)
 
 ## 일정·범위
 
 - 계획 시점: 핵심 평가 이후. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-23. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-23. GitHub 이슈: [#23](https://github.com/BBungya/finguard/issues/23).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
@@ -1002,14 +1002,14 @@ README, 시연 영상, 실험·설계 문서, 소개 문장
 
 ## 선행 작업
 
-- [FG-11](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-11)
-- [FG-12](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-12)
-- [FG-18](https://github.com/BBungya/finguard/blob/main/docs/DEVELOPMENT_ISSUES.md#fg-18)
+- [#11 — FG-11](https://github.com/BBungya/finguard/issues/11)
+- [#12 — FG-12](https://github.com/BBungya/finguard/issues/12)
+- [#18 — FG-18](https://github.com/BBungya/finguard/issues/18)
 
 ## 일정·범위
 
 - 계획 시점: 핵심 평가 이후. 8주는 가정이며 확정 마감일이 아니다.
-- 로컬 작업 ID: FG-24. 실제 이슈 번호는 게시 후 매핑한다.
+- 작업 ID: FG-24. GitHub 이슈: [#24](https://github.com/BBungya/finguard/issues/24).
 - 상세 요구사항: [프로젝트 기획서](https://github.com/BBungya/finguard/blob/main/docs/PROJECT_PLAN.md).
 
 ## 작업 결과
