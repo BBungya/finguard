@@ -1,0 +1,55 @@
+{
+  "checked_on": "2026-11-14",
+  "sample": {
+    "url": "https://github.com/BBungya/hana_power_on/blob/1aceec3710af65e5edd86ec7fc7034346de2a491/day4/data/credit_card_transactions-1000.csv",
+    "repository_revision": "1aceec3710af65e5edd86ec7fc7034346de2a491",
+    "file": "day4/data/credit_card_transactions-1000.csv",
+    "sha256": "1e6eb71343749f34e77a6f5d5781a89671ef8f8c31b6b60cd6e8e05f1bfeaa66",
+    "bytes": 269569,
+    "rows": 998,
+    "columns": 24,
+    "label_counts": {
+      "0": 998,
+      "1": 0
+    }
+  },
+  "compared_sources": [
+    {
+      "url": "https://github.com/BBungya/hana_power_on/tree/1aceec3710af65e5edd86ec7fc7034346de2a491/data",
+      "repository_revision": "1aceec3710af65e5edd86ec7fc7034346de2a491",
+      "archive_parts": [
+        "data/credit_card_transactions.z01",
+        "data/credit_card_transactions.z02",
+        "data/credit_card_transactions.zip"
+      ],
+      "file": "credit_card_transactions.csv",
+      "license_as_published": null,
+      "matched_sample_rows": 998,
+      "comparison": "exact_match_on_all_24_fields"
+    },
+    {
+      "url": "https://www.kaggle.com/datasets/priyamchoksi/credit-card-transactions-dataset",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/priyamchoksi/credit-card-transactions-dataset",
+      "version": 1,
+      "file": "credit_card_transactions.csv",
+      "license_as_published": "Apache-2.0",
+      "matched_sample_rows": 998,
+      "comparison": "exact_match_on_all_24_fields"
+    },
+    {
+      "url": "https://www.kaggle.com/datasets/kartik2112/fraud-detection",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/kartik2112/fraud-detection",
+      "version": 1,
+      "file": "fraudTrain.csv",
+      "license_as_published": "CC0-1.0",
+      "matched_sample_rows": 998,
+      "comparison": "matching_transaction_ids_and_labels_with_coordinate_text_differences"
+    }
+  ],
+  "comparison_scope": {
+    "source_prefix_rows": 1000,
+    "match_key": "trans_num",
+    "full_file_equivalence_checked": false
+  },
+  "data_card": "docs/data_card.md"
+}
