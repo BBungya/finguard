@@ -15,7 +15,7 @@
 </p>
 </div>
 
-> **현재 상태: 기획·개발 준비 단계.** 공개 저장소에 문서·템플릿·개발 이슈 24개를 게시했습니다. 실행 코드·학습 모델·배포 서비스는 없으며 아래 기능과 기술은 구현 계획입니다. 결과는 실제 측정 후 공개합니다.
+> **현재 상태: 기획·개발 준비 단계.** 개발 환경과 프로젝트 구조를 정리했고 공개 저장소에 개발 이슈 24개를 게시했습니다. 아래 기능과 기술은 구현 계획입니다. 결과는 실제 측정 후 공개합니다.
 
 <a id="overview"></a>
 
@@ -86,7 +86,17 @@ FG 작업 ID와 실제 GitHub 이슈의 대응은 [개발 작업 목록](docs/DE
 
 ## 시작하기
 
-현재는 문서와 GitHub 운영용 구성이 있습니다. [개발 환경 구성 #1](https://github.com/BBungya/finguard/issues/1)에서 Python 버전·의존성·설치와 실행 방법을 확정합니다. 이후 실제로 검증한 명령을 이 절에 추가합니다.
+개발 환경은 Python 3.12와 `uv`를 사용합니다. [uv를 설치](https://docs.astral.sh/uv/getting-started/installation/)한 뒤 저장소 루트에서 실행합니다.
+
+```sh
+uv python install 3.12
+uv sync --locked
+uv run --locked python --version
+uv run --locked pytest --version
+uv run --locked ruff --version
+```
+
+`uv sync --locked`는 `uv.lock`을 기준으로 `.venv`에 개발 도구를 설치합니다. 위 명령으로 환경을 구성할 때 DB, Redis, API 키는 필요하지 않습니다. 해당 기능을 개발할 때 `.env.example`을 `.env`로 복사하고 필요한 값을 채웁니다.
 
 지금은 [기획서](docs/PROJECT_PLAN.md) → [개발 이슈](docs/DEVELOPMENT_ISSUES.md) → [작업 규칙](docs/WORKFLOW.md) 순서로 확인할 수 있습니다. 아래 명령은 실제 이슈 번호 매핑을 유지하며 로컬 이슈·라벨 문서만 다시 생성합니다. 네트워크 접근이나 GitHub 게시를 수행하지 않습니다.
 
@@ -100,12 +110,17 @@ pwsh -File ./tools/prepare_repository.ps1
 ```text
 finguard/
 ├── README.md
+├── pyproject.toml
+├── uv.lock
+├── .python-version
+├── .env.example
 ├── .gitignore
 ├── .github/
 │   ├── ISSUE_TEMPLATE/          # 개발·버그·기능·유지보수·실험 양식
 │   ├── pull_request_template.md
 │   └── labels.json
 ├── docs/
+│   ├── architecture.md          # 현재 구성과 구현할 디렉터리
 │   ├── PROJECT_PLAN.md
 │   ├── DEVELOPMENT_ISSUES.md
 │   ├── WORKFLOW.md
@@ -115,7 +130,7 @@ finguard/
     └── prepare_repository.ps1   # 로컬 초안 생성
 ```
 
-API·ML·검색·화면·평가 코드는 구현할 때 추가합니다.
+구현할 디렉터리와 서비스 흐름은 [개발 구조](docs/architecture.md)에 정리했습니다.
 
 </details>
 
@@ -181,7 +196,7 @@ API·ML·검색·화면·평가 코드는 구현할 때 추가합니다.
 
 ## 실행 및 결과
 
-현재 실행 가능한 애플리케이션과 측정 결과는 없습니다. 첫 구현 완료 후 환경 설정, 실행 명령, 테스트 방법, 데모 링크와 실험 결과를 추가합니다.
+현재는 [개발 환경](#getting-started)을 구성할 수 있습니다. 첫 구현 완료 후 애플리케이션 실행 명령, 테스트 방법, 데모 링크와 실험 결과를 추가합니다.
 
 ## 참고 자료와 이용 조건
 

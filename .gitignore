@@ -10,12 +10,16 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+.uv-cache/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 .coverage
+.coverage.*
 htmlcov/
 *.egg-info/
+build/
+dist/
 
 # Data, models and local stores
 data/raw/
