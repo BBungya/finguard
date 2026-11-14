@@ -98,6 +98,16 @@ uv run --locked ruff --version
 
 `uv sync --locked`는 `uv.lock`을 기준으로 `.venv`에 개발 도구를 설치합니다. 위 명령으로 환경을 구성할 때 DB, Redis, API 키는 필요하지 않습니다. 해당 기능을 개발할 때 `.env.example`을 `.env`로 복사하고 필요한 값을 채웁니다.
 
+### CSV 거래를 시간순으로 다시 입력하기
+
+거래 CSV를 로컬 `data/raw/`에 저장한 뒤 실행합니다. 입력 형식과 검증 규칙은 [거래 재생 문서](docs/transaction_replay.md)에 있습니다.
+
+```sh
+uv run --locked python -m finguard.replay data/raw/transactions.csv --speed 0
+```
+
+거래는 터미널에 한 줄씩 출력됩니다. 거래 점수 API로 보내는 연결은 [#9](https://github.com/BBungya/finguard/issues/9)에서 구현합니다.
+
 지금은 [기획서](docs/PROJECT_PLAN.md) → [개발 이슈](docs/DEVELOPMENT_ISSUES.md) → [작업 규칙](docs/WORKFLOW.md) 순서로 확인할 수 있습니다. 아래 명령은 실제 이슈 번호 매핑을 유지하며 로컬 이슈·라벨 문서만 다시 생성합니다. 네트워크 접근이나 GitHub 게시를 수행하지 않습니다.
 
 ```powershell
