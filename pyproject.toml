@@ -1,0 +1,16 @@
+[project]
+name = "finguard"
+version = "0.1.0"
+description = "Card transaction fraud detection and investigation"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8,<10",
+    "ruff>=0.11,<1",
+]
+
+[tool.uv]
+package = false
