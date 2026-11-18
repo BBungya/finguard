@@ -36,6 +36,23 @@ def outcome(labels, selected):
     }
 
 
+def daily_rank(frame, scores):
+    ranked = pd.DataFrame(
+        {
+            "score": scores,
+            "time": frame["trans_date_trans_time"].to_numpy(),
+            "id": frame["trans_num"].to_numpy(),
+        }
+    ).sort_values(["score", "time", "id"], ascending=[False, True, True])
+    return ranked.groupby(ranked["time"].dt.normalize()).cumcount()
+
+
+def select_daily(rank, budget):
+    selected = np.zeros(len(rank), dtype=bool)
+    selected[rank.index[rank < budget]] = True
+    return selected
+
+
 def evaluate(frame, scores, threshold, settings, unseen_cards):
     labels = frame["is_fraud"].to_numpy()
     unseen = frame["cc_num"].isin(unseen_cards).to_numpy()
@@ -44,15 +61,8 @@ def evaluate(frame, scores, threshold, settings, unseen_cards):
         if threshold is not None
         else np.zeros(len(scores), dtype=bool)
     )
-    ranked = pd.DataFrame(
-        {
-            "score": scores,
-            "time": frame["trans_date_trans_time"].to_numpy(),
-            "id": frame["trans_num"].to_numpy(),
-        }
-    ).sort_values(["score", "time", "id"], ascending=[False, True, True])
     # 전체 거래에서 먼저 순위를 정해야 신규 카드만으로 한도를 다시 채우지 않는다.
-    day_rank = ranked.groupby(ranked["time"].dt.normalize()).cumcount()
+    day_rank = daily_rank(frame, scores)
     budgets = [
         settings["primary_daily_review_budget"],
         *settings["comparison_daily_review_budgets"],
@@ -78,8 +88,7 @@ def evaluate(frame, scores, threshold, settings, unseen_cards):
         "budgets_unseen": {},
     }
     for budget in sorted(budgets):
-        chosen = np.zeros(len(scores), dtype=bool)
-        chosen[ranked.index[day_rank < budget]] = True
+        chosen = select_daily(day_rank, budget)
         result["budgets"][str(budget)] = with_cost(outcome(labels, chosen))
         result["budgets_unseen"][str(budget)] = outcome(labels[unseen], chosen[unseen])
     return result
