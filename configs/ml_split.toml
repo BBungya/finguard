@@ -1,0 +1,18 @@
+version = 1
+dataset_manifest = "data/manifests/sparkov_evaluation.json"
+timestamp_column = "trans_date_trans_time"
+label_column = "is_fraud"
+customer_key = "cc_num"
+
+[periods]
+train_start = 2019-01-01T00:00:00
+validation_start = 2020-01-01T00:00:00
+test_start = 2020-07-01T00:00:00
+end_exclusive = 2021-01-01T00:00:00
+
+[evaluation]
+primary_daily_review_budget = 20
+comparison_daily_review_budgets = [10, 50, 100]
+review_cost_units = 1
+primary_missed_fraud_cost_units = 10
+comparison_missed_fraud_cost_units = [5, 20]

@@ -15,7 +15,7 @@
 ## 이용 및 공개 조건
 
 - Priyam Choksi 배포본 버전 1은 Kaggle에 Apache 2.0으로 표시됩니다. 이 배포본을 재배포하는 경우 라이선스 사본 제공, 관련 고지 유지, 변경 파일 표시 등 해당 조건을 따릅니다. [Kaggle 메타데이터](https://www.kaggle.com/api/v1/datasets/view/priyamchoksi/credit-card-transactions-dataset) · [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
-- Kartik Shenoy 배포본 버전 1은 Kaggle에 CC0로 표시됩니다. 합성 데이터 성능 평가 시 이 공식 배포본을 직접 확보하고 버전·파일 해시·평가 분할을 기록합니다. 해당 결과는 합성 거래에 대한 결과로 표기합니다. [Kaggle 메타데이터](https://www.kaggle.com/api/v1/datasets/view/kartik2112/fraud-detection) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+- Kartik Shenoy 배포본 버전 1은 Kaggle에 CC0로 표시됩니다. 이 배포본을 합성 거래 평가에 사용합니다. [Kaggle 메타데이터](https://www.kaggle.com/api/v1/datasets/view/kartik2112/fraud-detection) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 - 교육 저장소에서는 별도 저장소 라이선스 표시를 확인하지 못했습니다. 위 라이선스는 각 Kaggle 배포본에 표시된 조건입니다. FinGuard 공개 저장소에는 데이터 출처, 파일 해시, 집계 통계만 기록합니다. [교육 저장소](https://github.com/BBungya/hana_power_on)
 
 ## 샘플 품질과 라벨
@@ -33,6 +33,12 @@
 라벨과 위치의 해석은 생성기 코드에 근거합니다. `Unnamed: 0`은 행 인덱스이며, 중복 검사에는 거래 식별자 `trans_num`을 사용합니다. `cc_num`, `zip`, `merch_zipcode`는 식별자나 코드이므로 원본을 읽을 때 문자열로 보존합니다. 거래 재생 시에는 시간대 적용 여부와 두 시간 컬럼의 정합성을 먼저 확인합니다. [Sparkov 거래 생성 코드](https://github.com/namebrandon/Sparkov_Data_Generation/blob/b5eb45c89d36f2aa4ef16044a42945bed8b96d93/datagen_transaction.py)
 
 샘플에는 사기 거래가 없어 사기 탐지 재현율을 계산할 수 없습니다. 평가에는 정상·사기 거래가 모두 포함된 기간별 분할을 사용하고, 분할마다 거래 수와 사기 건수를 보고합니다.
+
+## 평가용 배포본 확보
+
+2026-11-18에 Kaggle에서 버전 1을 받아 로컬 `data/raw/kaggle/kartik2112/fraud-detection/v1/`에 저장했습니다. `fraudTrain.csv`와 `fraudTest.csv`에서 거래 검증에 필요한 컬럼 및 정상·사기 라벨이 모두 있는 것을 확인했습니다. 파일 크기와 SHA-256은 [평가용 데이터 매니페스트](../data/manifests/sparkov_evaluation.json)에 기록했습니다.
+
+다시 확보할 때는 매니페스트의 다운로드 주소에서 ZIP을 받고, 두 CSV를 풀어 각각의 SHA-256을 확인합니다. 파일 이름은 Kaggle 배포 당시의 구분입니다. FinGuard의 학습·검증·최종 테스트 기간과 사기 건수는 [ML 시간 분할 보고서](../reports/ml_split_distribution.md)에 정리했습니다.
 
 ## 공개 데모 식별자와 제외 항목
 
