@@ -84,19 +84,6 @@ def inputs(rows):
     )
 
 
-def make_preprocessor():
-    return ColumnTransformer(
-        [
-            ("amount", StandardScaler(), ["log_amount"]),
-            (
-                "categories",
-                OneHotEncoder(handle_unknown="ignore", dtype=np.float32),
-                ["hour", "category"],
-            ),
-        ]
-    )
-
-
 def main():
     settings = tomllib.loads(
         (ROOT / "configs/ml_split.toml").read_text(encoding="utf-8")
@@ -107,7 +94,16 @@ def main():
     unseen = set(pd.concat([validation["cc_num"], test["cc_num"]])) - set(
         train["cc_num"]
     )
-    preprocessor = make_preprocessor()
+    preprocessor = ColumnTransformer(
+        [
+            ("amount", StandardScaler(), ["log_amount"]),
+            (
+                "categories",
+                OneHotEncoder(handle_unknown="ignore", dtype=np.float32),
+                ["hour", "category"],
+            ),
+        ]
+    )
     # 스케일과 범주 목록을 학습 기간에서만 결정한다.
     train_inputs = preprocessor.fit_transform(inputs(train))
     validation_inputs = preprocessor.transform(inputs(validation))
