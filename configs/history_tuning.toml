@@ -1,0 +1,17 @@
+[[xgboost_trials]]
+name = "xgb_history_shallow"
+max_depth = 3
+
+[[xgboost_trials]]
+name = "xgb_history_deep"
+max_depth = 7
+
+[[xgboost_trials]]
+name = "xgb_history_slow"
+learning_rate = 0.05
+n_estimators = 200
+
+[[xgboost_trials]]
+name = "xgb_history_depth7_lr020"
+max_depth = 7
+learning_rate = 0.2
