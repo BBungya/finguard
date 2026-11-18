@@ -84,14 +84,14 @@ def inputs(rows):
     )
 
 
-def make_preprocessor():
+def make_preprocessor(categorical_columns=("hour", "category")):
     return ColumnTransformer(
         [
             ("amount", StandardScaler(), ["log_amount"]),
             (
                 "categories",
                 OneHotEncoder(handle_unknown="ignore", dtype=np.float32),
-                ["hour", "category"],
+                list(categorical_columns),
             ),
         ]
     )

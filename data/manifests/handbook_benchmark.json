@@ -1,0 +1,18 @@
+{
+  "dataset": "Fraud Detection Handbook simulated transactions",
+  "source": "https://fraud-detection-handbook.github.io/fraud-detection-handbook/Chapter_3_GettingStarted/SimulatedDataset.html",
+  "notebook_revision": "eabce290e52013e1672963d3728e3d63cd8b0705",
+  "notebook_url": "https://raw.githubusercontent.com/Fraud-Detection-Handbook/fraud-detection-handbook/eabce290e52013e1672963d3728e3d63cd8b0705/Chapter_3_GettingStarted/SimulatedDataset.ipynb",
+  "notebook_sha256": "3906c03740e37ecf1606f548fa937a2e8664127f76a54edad43d1bd64e9a731b",
+  "generator_code_license": "GPL-3.0",
+  "local_directory": "data/raw/handbook",
+  "file": "transactions.csv",
+  "csv_sha256": "4f04feb3195e896df50f5047020dfbc54592345ed3bf4f064f2e9d6ca2e6153e",
+  "rows": 1754155,
+  "fraud_rows": 14681,
+  "generator_environment": {
+    "python": "3.12.13",
+    "numpy": "1.26.4",
+    "pandas": "2.2.3"
+  }
+}
