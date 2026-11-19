@@ -1,0 +1,48 @@
+{
+  "measured_at_kst": "2026-11-19T23:06:29.987273+09:00",
+  "python": "3.12.13",
+  "os": "Windows 11",
+  "postgres_version": "17.12 (Debian 17.12-1.pgdg13+1)",
+  "redis_version": "7.4.12",
+  "model_version": "aef236bf79b8d4937c862ad22277336cb9f2b52044941f36692ad5d1f77d23bf",
+  "cards": 4,
+  "history_per_card": 32,
+  "measurements": [
+    {
+      "mode": "postgres_only",
+      "requests": 64,
+      "successful_requests": 64,
+      "api_processes": 2,
+      "concurrency": 4,
+      "elapsed_seconds": 0.854,
+      "throughput_rps": 74.94,
+      "p50_ms": 50.55,
+      "p95_ms": 67.99,
+      "max_ms": 77.92
+    },
+    {
+      "mode": "redis_shared",
+      "requests": 64,
+      "successful_requests": 64,
+      "api_processes": 2,
+      "concurrency": 4,
+      "elapsed_seconds": 0.891,
+      "throughput_rps": 71.86,
+      "p50_ms": 48.7,
+      "p95_ms": 89.3,
+      "max_ms": 104.02
+    }
+  ],
+  "replayed_transactions": 395,
+  "checks": {
+    "concurrent_duplicates": true,
+    "input_conflicts": true,
+    "redis_unavailable": true,
+    "restart": true,
+    "cache_recovery": true,
+    "score_feature_version_parity": true,
+    "llm_calls": 0
+  },
+  "feature_version": "1",
+  "policy_version": "fixed-threshold-v1"
+}

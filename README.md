@@ -212,6 +212,8 @@ Docker Desktop 설치와 PostgreSQL에 거래·판단 결과를 저장하는 실
 
 Redis로 카드 이력을 공유하고 캐시 장애 시 DB에서 복구하는 실행 방법은 [Redis 이력 안내](docs/redis_history.md)에 있습니다. Windows cmd와 PowerShell 명령을 함께 정리했습니다.
 
+실제 모델과 두 API 서버의 버전·중복·장애 복구 검증 및 로컬 응답 시간 측정은 [통합 검증 안내](docs/score_api_verification.md)와 [측정 결과](reports/score_api_verification.md)에 있습니다.
+
 현재는 [개발 환경](#getting-started)을 구성하고 CSV 거래를 로컬에서 재생할 수 있습니다. 합성 거래에서 금액 규칙과 세 학습 모델을 비교한 결과와 실행 명령은 [탐지 기준선 보고서](reports/baseline.md)에 있습니다.
 
 ## 참고 자료와 이용 조건
