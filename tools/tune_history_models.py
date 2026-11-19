@@ -1,8 +1,11 @@
 """같은 거래열에서 이력 추가 효과와 XGBoost 설정을 따로 비교한다."""
 
 import json
+import os
+import platform
 import tomllib
 from decimal import Decimal
+from importlib.metadata import version
 from time import perf_counter
 
 import joblib
@@ -16,6 +19,7 @@ from xgboost import XGBClassifier
 
 from finguard.baseline_metrics import choose_threshold, evaluate
 from finguard.features import FEATURE_VERSION, HistoryFeatureCalculator
+from finguard.model_diagnostics import calibration, measure_model, subgroup_errors
 from finguard.transactions import Transaction
 
 HISTORY_COLUMNS = ("count_1h", "count_7d", "mean_amount_7d", "std_amount_7d")
@@ -128,7 +132,21 @@ def main():
             )
         )
 
-    results = {"history_feature_version": FEATURE_VERSION, "candidates": {}}
+    results = {
+        "history_feature_version": FEATURE_VERSION,
+        "seed": seed,
+        "environment": {
+            "python": platform.python_version(),
+            "platform": platform.platform(),
+            "processor": platform.processor(),
+            "logical_cpus": os.cpu_count(),
+            **{
+                name: version(name)
+                for name in ("numpy", "pandas", "scikit-learn", "xgboost")
+            },
+        },
+        "candidates": {},
+    }
     models = {}
     budget = str(settings["primary_daily_review_budget"])
     train_labels = train["is_fraud"].to_numpy()
@@ -167,15 +185,20 @@ def main():
     print(f"Selected {winner}; evaluating comparison models", flush=True)
     base_test = preprocessor.transform(inputs(test))
     history_test = add_history(base_test, next(history))
+    test_labels = test["is_fraud"].to_numpy()
     for name in dict.fromkeys(
-        ("rf_base", "rf_history", "xgb_base", "xgb_history", winner)
+        ("rf_base", "rf_history", "xgb_base", "xgb_history", "xgb_history_deep", winner)
     ):
         uses_history, model = models[name]
-        scores = model.predict_proba(history_test if uses_history else base_test)[:, 1]
+        test_inputs = history_test if uses_history else base_test
+        scores = model.predict_proba(test_inputs)[:, 1]
         candidate = results["candidates"][name]
         candidate["test"] = evaluate(
             test, scores, candidate["threshold_from_validation"], settings, unseen
         )
+        candidate["calibration"] = calibration(test_labels, scores)
+        candidate["errors"] = subgroup_errors(test, scores, int(budget), unseen)
+        candidate["inference"] = measure_model(model, test_inputs)
 
     output = ROOT / "artifacts/history_tuning"
     output.mkdir(parents=True, exist_ok=True)
