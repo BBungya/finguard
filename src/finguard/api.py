@@ -56,7 +56,7 @@ class ScoreResponse(BaseModel):
     features: HistoryFeatures
 
 
-def create_app(model=None) -> FastAPI:
+def create_app(model=None, *, database_url=None) -> FastAPI:
     @asynccontextmanager
     async def lifespan(app):
         # 서버 시작 때 한 번 읽어 요청마다 같은 모델을 사용한다.
@@ -69,7 +69,15 @@ def create_app(model=None) -> FastAPI:
                 )
             )
             loaded = ScoringModel(path)
-        app.state.scoring = InMemoryScoringService(loaded)
+        url = (
+            os.environ.get("DATABASE_URL", "") if database_url is None else database_url
+        ).strip()
+        if url:
+            from finguard.database import PostgresScoringService
+
+            app.state.scoring = PostgresScoringService(loaded, url)
+        else:
+            app.state.scoring = InMemoryScoringService(loaded)
         yield
 
     application = FastAPI(

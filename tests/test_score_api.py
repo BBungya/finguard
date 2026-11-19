@@ -43,7 +43,7 @@ def payload(identifier="first", time="2026-01-01 10:00:00", **overrides):
 
 def test_scores_use_previous_history_and_duplicates_return_original_result():
     model = ExampleModel()
-    with TestClient(create_app(model)) as client:
+    with TestClient(create_app(model, database_url="")) as client:
         first = client.post("/transactions/score", json=payload())
         second = client.post("/transactions/score", json=payload("second"))
         duplicate = client.post("/transactions/score", json=payload(amount="10.0"))
@@ -84,7 +84,7 @@ def test_scores_use_previous_history_and_duplicates_return_original_result():
 )
 def test_invalid_requests_do_not_enter_history(overrides):
     model = ExampleModel()
-    with TestClient(create_app(model)) as client:
+    with TestClient(create_app(model, database_url="")) as client:
         assert (
             client.post("/transactions/score", json=payload(**overrides)).status_code
             == 422
@@ -96,7 +96,7 @@ def test_invalid_requests_do_not_enter_history(overrides):
 
 def test_model_failure_does_not_commit_expired_or_new_history():
     model = ExampleModel()
-    with TestClient(create_app(model)) as client:
+    with TestClient(create_app(model, database_url="")) as client:
         assert client.post("/transactions/score", json=payload()).status_code == 200
         model.fail = True
         failed = client.post(

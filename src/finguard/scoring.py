@@ -106,6 +106,26 @@ class ScoringUnavailable(RuntimeError):
     pass
 
 
+def evaluate(model, transaction: Transaction, features: HistoryFeatures) -> ScoreResult:
+    """저장 방식과 관계없이 같은 모델과 판단 기준을 적용한다."""
+    try:
+        # 한 건 요청에서 과도한 계산 스레드를 만들지 않도록 제한한다.
+        with threadpool_limits(limits=1):
+            score, group = model.predict(transaction, features)
+        return ScoreResult(
+            transaction_id=transaction.transaction_id,
+            risk_score=score,
+            review_required=model.threshold is not None and score >= model.threshold,
+            threshold=model.threshold,
+            cluster_id=group,
+            model_version=model.version,
+            policy_version=POLICY_VERSION,
+            features=features,
+        )
+    except Exception as error:
+        raise ScoringUnavailable("scoring_failed") from error
+
+
 class InMemoryScoringService:
     """단일 프로세스의 로컬 검증용 상태. DB 연결은 후속 단계에서 구현한다."""
 
@@ -131,23 +151,7 @@ class InMemoryScoringService:
                 features = candidate.process(transaction)
             except ValueError as error:
                 raise TransactionConflict(str(error)) from error
-            try:
-                # 한 건 요청에서 과도한 계산 스레드를 만들지 않도록 제한한다.
-                with threadpool_limits(limits=1):
-                    score, group = self.model.predict(transaction, features)
-                result = ScoreResult(
-                    transaction_id=transaction.transaction_id,
-                    risk_score=score,
-                    review_required=self.model.threshold is not None
-                    and score >= self.model.threshold,
-                    threshold=self.model.threshold,
-                    cluster_id=group,
-                    model_version=self.model.version,
-                    policy_version=POLICY_VERSION,
-                    features=features,
-                )
-            except Exception as error:
-                raise ScoringUnavailable("scoring_failed") from error
+            result = evaluate(self.model, transaction, features)
             # 점수 계산까지 성공하면 이력과 재전송용 응답을 함께 확정한다.
             self._histories[transaction.card_id] = candidate
             self._results[transaction.transaction_id] = (transaction, result)

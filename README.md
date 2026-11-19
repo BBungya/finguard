@@ -208,6 +208,8 @@ finguard/
 
 거래 한 건을 보내 점수를 받는 로컬 API 실행 방법과 요청·응답은 [거래 점수 API](docs/score_api.md)에 있습니다.
 
+Docker Desktop 설치와 PostgreSQL에 거래·판단 결과를 저장하는 실행 방법은 [PostgreSQL 안내](docs/postgresql.md)에 있습니다.
+
 현재는 [개발 환경](#getting-started)을 구성하고 CSV 거래를 로컬에서 재생할 수 있습니다. 합성 거래에서 금액 규칙과 세 학습 모델을 비교한 결과와 실행 명령은 [탐지 기준선 보고서](reports/baseline.md)에 있습니다.
 
 ## 참고 자료와 이용 조건
