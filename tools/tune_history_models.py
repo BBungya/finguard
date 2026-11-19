@@ -11,7 +11,6 @@ from time import perf_counter
 import joblib
 import numpy as np
 import pandas as pd
-from scipy.sparse import csr_matrix, hstack
 from sklearn.ensemble import RandomForestClassifier
 from threadpoolctl import threadpool_limits
 from train_baselines import ROOT, inputs, load_periods, make_preprocessor
@@ -20,6 +19,7 @@ from xgboost import XGBClassifier
 from finguard.baseline_metrics import choose_threshold, evaluate
 from finguard.features import FEATURE_VERSION, HistoryFeatureCalculator
 from finguard.model_diagnostics import calibration, measure_model, subgroup_errors
+from finguard.model_inputs import add_history
 from finguard.transactions import Transaction
 
 HISTORY_COLUMNS = ("count_1h", "count_7d", "mean_amount_7d", "std_amount_7d")
@@ -55,20 +55,6 @@ def history_inputs(periods):
                 result.std_amount_7d if result.std_amount_7d is not None else -1,
             )
         yield values
-
-
-def add_history(base, history):
-    # XGBoost는 희소 행렬의 생략된 값을 결측으로 본다. 이력의 0은 실제 값이다.
-    rows, columns = history.shape
-    explicit_history = csr_matrix(
-        (
-            history.ravel(),
-            np.tile(np.arange(columns), rows),
-            np.arange(0, (rows + 1) * columns, columns),
-        ),
-        shape=history.shape,
-    )
-    return hstack((base, explicit_history), format="csr")
 
 
 def read_settings(name):
