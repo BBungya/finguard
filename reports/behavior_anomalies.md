@@ -28,12 +28,17 @@ scikit-learn의 `score_samples`는 작은 값이 더 드문 행동을 뜻하므�
 
 ![이상 점수 구간별 정상·사기 건수와 사기 비율](figures/behavior_anomalies.png)
 
+![정상·사기 거래의 이상 점수 분포](figures/behavior_score_distributions.png)
+
+분포의 왼쪽은 개별 검증 거래 건수를 로그 눈금으로 나타냅니다. 오른쪽은 정상과 사기 각각의 면적을 1로 맞춰 점수가 어디에 집중되는지 비교합니다. 사기 비율을 나타내는 앞선 막대그래프와 읽는 방법이 다릅니다. 점선은 학습 점수의 99백분위입니다.
+
 왼쪽 그래프는 건수 차이를 함께 볼 수 있게 로그 눈금을 사용합니다. 오른쪽은 각 구간 안의 사기 비율입니다. 이력이 없는 검증 거래 148건은 이 그래프에서 제외했습니다.
 
 두 보고서의 그래프는 다음 명령으로 집계 JSON에서 다시 그릴 수 있습니다.
 
 ```sh
 uv run --locked --group ml python tools/plot_behavior_analysis.py
+uv run --locked --group ml python tools/plot_behavior_distributions.py
 ```
 
 ## 실행

@@ -15,7 +15,7 @@ from matplotlib.font_manager import FontProperties, fontManager
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def main():
+def configure_style():
     font = Path("C:/Windows/Fonts/malgun.ttf")
     if font.exists():
         fontManager.addfont(str(font))
@@ -27,6 +27,10 @@ def main():
             "axes.unicode_minus": False,
         },
     )
+
+
+def main():
+    configure_style()
     clusters = json.loads(
         (ROOT / "artifacts/behavior_clusters/results.json").read_text(encoding="utf-8")
     )
