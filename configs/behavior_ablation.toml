@@ -1,0 +1,8 @@
+cluster_count = 3
+variants = ["baseline", "cluster", "anomaly", "both"]
+selection_daily_budget = 20
+
+[xgboost]
+max_depth = 7
+n_estimators = 100
+learning_rate = 0.1
