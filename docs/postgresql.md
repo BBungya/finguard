@@ -1,6 +1,6 @@
 # 거래와 판단 결과를 PostgreSQL에 저장하기
 
-현재 단계에서는 PostgreSQL을 거래 원본과 판단 결과의 기준 저장소로 사용합니다. 저장된 거래로 직전 이력을 계산하므로 API를 재시작해도 이전 거래가 다음 판단에 반영됩니다. Redis는 아직 사용하지 않습니다.
+PostgreSQL을 거래 원본과 판단 결과의 기준 저장소로 사용합니다. API를 재시작해도 이전 거래가 다음 판단에 반영됩니다. `REDIS_URL`을 설정하면 [Redis 카드 이력 공유](redis_history.md)를 사용하고, 캐시가 없거나 오래되면 DB에서 다시 계산합니다.
 
 ## Windows 준비
 
@@ -24,7 +24,7 @@ PostgreSQL은 아래 Compose 명령이 내려받아 실행하므로 Windows에 �
 
 ```powershell
 if (-not (Test-Path .env)) { Copy-Item .env.example .env }
-docker compose up -d --wait postgres
+docker compose up -d --wait postgres redis
 uv run --env-file .env --locked --group api python -m finguard.database
 uv run --env-file .env --locked --group api uvicorn finguard.api:app --host 127.0.0.1 --port 8000 --workers 1
 ```
@@ -82,6 +82,6 @@ uv run --locked --group api pytest -q -W error
 
 DB 주소가 없으면 PostgreSQL 통합 테스트는 건너뜁니다. GitHub Actions에서는 PostgreSQL 17을 실행해 해당 테스트도 수행합니다. 재시작, 모델 교체 후 중복 응답, 동시 중복·동일 카드 요청, 다른 카드의 거래 ID 충돌, DB 연결·모델·INSERT·COMMIT 실패, 이력 시간 경계와 소수 정밀도를 확인합니다.
 
-이번 구현에서는 격리된 PostgreSQL 17.11에서 전체 테스트 26개를 통과했습니다. 실제 저장 모델과 Uvicorn에서도 거래 3건의 점수·이력이 메모리 모드와 일치했고, API 재시작 후 최초 응답 재사용과 이력 유지도 확인했습니다. 개발 PC에 Docker가 없어 Compose 명령 실행은 아직 확인하지 못했습니다.
+PostgreSQL 저장 단계에서 전체 테스트 26개를 통과했습니다. 이후 로컬 Docker의 PostgreSQL·Redis를 연결해 전체 테스트 44개를 통과했고 Compose 설정과 두 컨테이너의 정상 실행도 확인했습니다. 실제 저장 모델과 Uvicorn으로 DB·Redis 모드 거래 4건의 점수·이력, 재시작 후 최초 응답 재사용과 캐시 복구도 확인했습니다.
 
-현재는 요청마다 DB에서 최근 거래를 읽어 이력을 다시 계산합니다. 데이터가 많을 때의 성능 측정과 Redis 이력 캐시는 후속 작업입니다. Redis를 추가할 때에도 PostgreSQL 기록을 기준으로 복구하고, DB와 Redis가 동시에 저장된다고 가정하지 않습니다. 아직 사건 생성 기능은 없으므로 사건 중복 방지는 해당 기능을 연결할 때 검증합니다.
+`REDIS_URL`이 없으면 요청마다 DB에서 최근 거래를 읽어 이력을 계산합니다. 설정하면 DB 번호와 일치하는 캐시를 사용합니다. 복구는 PostgreSQL 기록을 기준으로 하며 DB와 Redis가 동시에 저장된다고 가정하지 않습니다. 성능 측정과 사건 생성 시 중복 방지는 후속 작업입니다.

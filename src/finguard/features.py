@@ -54,6 +54,61 @@ class HistoryFeatureCalculator:
     def __init__(self) -> None:
         self._cards: dict[str, _CardHistory] = {}
 
+    def snapshot(self, card_id: str) -> dict:
+        """Redis에 보관할 카드 한 장의 이력. 금액은 정수 문자열로 남긴다."""
+        history = self._cards[card_id]
+        return {
+            "snapshot_version": "1",
+            "feature_version": FEATURE_VERSION,
+            "last_time": history.last_time.isoformat(),
+            "amounts": [
+                [time.isoformat(), str(cents)] for time, cents in history.amounts_7d
+            ],
+        }
+
+    @classmethod
+    def from_snapshot(cls, card_id: str, data: dict) -> "HistoryFeatureCalculator":
+        """저장 형식·시간 범위를 검증하고 건수·합계를 다시 구성한다."""
+        if (
+            data["snapshot_version"] != "1"
+            or data["feature_version"] != FEATURE_VERSION
+        ):
+            raise ValueError("unsupported_history_snapshot")
+        last_time = datetime.fromisoformat(data["last_time"])
+        if last_time.tzinfo is not None or not isinstance(data["amounts"], list):
+            raise ValueError("invalid_history_snapshot")
+        history = _CardHistory()
+        previous = None
+        for item in data["amounts"]:
+            if not isinstance(item, list) or len(item) != 2:
+                raise ValueError("invalid_history_entry")
+            timestamp, cents = item
+            time = datetime.fromisoformat(timestamp)
+            if (
+                time.tzinfo is not None
+                or time > last_time
+                or last_time - time > AMOUNT_WINDOW
+                or (previous is not None and time < previous)
+                or not isinstance(cents, str)
+                or not cents.isascii()
+                or not cents.isdecimal()
+                or int(cents) <= 0
+            ):
+                raise ValueError("invalid_history_entry")
+            value = int(cents)
+            history.amounts_7d.append((time, value))
+            history.sum_cents += value
+            history.sum_squared_cents += value * value
+            if last_time - time <= COUNT_WINDOW:
+                history.times_1h.append(time)
+            previous = time
+        if previous != last_time:
+            raise ValueError("missing_latest_history_entry")
+        history.last_time = last_time
+        calculator = cls()
+        calculator._cards[card_id] = history
+        return calculator
+
     def process(self, transaction: Transaction) -> HistoryFeatures:
         now = transaction.occurred_at
         if not transaction.card_id.strip():

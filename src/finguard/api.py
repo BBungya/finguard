@@ -56,7 +56,7 @@ class ScoreResponse(BaseModel):
     features: HistoryFeatures
 
 
-def create_app(model=None, *, database_url=None) -> FastAPI:
+def create_app(model=None, *, database_url=None, redis_url=None) -> FastAPI:
     @asynccontextmanager
     async def lifespan(app):
         # 서버 시작 때 한 번 읽어 요청마다 같은 모델을 사용한다.
@@ -72,13 +72,27 @@ def create_app(model=None, *, database_url=None) -> FastAPI:
         url = (
             os.environ.get("DATABASE_URL", "") if database_url is None else database_url
         ).strip()
+        cache_url = (
+            os.environ.get("REDIS_URL", "") if redis_url is None else redis_url
+        ).strip()
+        if cache_url and not url:
+            raise ValueError("REDIS_URL을 사용하려면 DATABASE_URL도 설정하세요.")
+        cache = None
+        if cache_url:
+            from finguard.history_cache import RedisHistoryCache
+
+            cache = RedisHistoryCache(cache_url, url)
         if url:
             from finguard.database import PostgresScoringService
 
-            app.state.scoring = PostgresScoringService(loaded, url)
+            app.state.scoring = PostgresScoringService(loaded, url, history_cache=cache)
         else:
             app.state.scoring = InMemoryScoringService(loaded)
-        yield
+        try:
+            yield
+        finally:
+            if cache is not None:
+                cache.close()
 
     application = FastAPI(
         title="FinGuard 거래 점수 API", version="0.1.0", lifespan=lifespan

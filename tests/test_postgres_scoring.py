@@ -1,8 +1,6 @@
 """실제 PostgreSQL에서 저장·재시작·경합·롤백을 확인한다."""
 
-import os
 from concurrent.futures import ThreadPoolExecutor
-from uuid import uuid4
 
 import pytest
 
@@ -11,35 +9,12 @@ pytest.importorskip("fastapi")
 pytest.importorskip("sklearn")
 
 from fastapi.testclient import TestClient
-from psycopg import sql
-from psycopg.conninfo import make_conninfo
 from test_score_api import ExampleModel, payload
 
 from finguard import database
 from finguard.api import ScoreRequest, create_app
-from finguard.database import PostgresScoringService, initialize
+from finguard.database import PostgresScoringService
 from finguard.scoring import InMemoryScoringService, TransactionConflict
-
-
-@pytest.fixture
-def database_url():
-    base = os.environ.get("TEST_DATABASE_URL")
-    if not base:
-        pytest.skip("실제 DB 검증에는 TEST_DATABASE_URL이 필요합니다.")
-    # 개발용 테이블을 지우지 않고 테스트마다 별도 스키마를 사용한다.
-    schema = "test_" + uuid4().hex
-    with psycopg.connect(base, autocommit=True) as connection:
-        connection.execute(sql.SQL("CREATE SCHEMA {}").format(sql.Identifier(schema)))
-    url = make_conninfo(base, options=f"-c search_path={schema}")
-    try:
-        initialize(url)
-        initialize(url)
-        yield url
-    finally:
-        with psycopg.connect(base, autocommit=True) as connection:
-            connection.execute(
-                sql.SQL("DROP SCHEMA {} CASCADE").format(sql.Identifier(schema))
-            )
 
 
 def count_rows(url):

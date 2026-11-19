@@ -1,4 +1,4 @@
-"""PostgreSQL 원본 기록. Redis를 붙이기 전에는 이 기록으로 이력을 계산한다."""
+"""PostgreSQL 원본 기록과 선택적인 Redis 이력 캐시를 연결한다."""
 
 import json
 import os
@@ -75,9 +75,26 @@ def dump_result(data):
 
 
 class PostgresScoringService:
-    def __init__(self, model, database_url):
+    def __init__(self, model, database_url, *, history_cache=None):
         self.model = model
         self.database_url = database_url
+        self.history_cache = history_cache
+
+    def load_history(self, connection, transaction):
+        calculator = HistoryFeatureCalculator()
+        # 7일보다 오래된 거래는 이번 계산에서 제외하되 원본은 남긴다.
+        start = datetime.min
+        if transaction.occurred_at - start >= AMOUNT_WINDOW:
+            start = transaction.occurred_at - AMOUNT_WINDOW
+        rows = connection.execute(
+            "SELECT transaction_id, card_id, occurred_at, amount, category "
+            "FROM scored_transactions WHERE card_id = %s AND occurred_at >= %s "
+            "ORDER BY occurred_at, sequence",
+            (transaction.card_id, start),
+        )
+        for row in rows:
+            calculator.process(stored_transaction(row))
+        return calculator
 
     def score(self, transaction: Transaction) -> ScoreResult:
         try:
@@ -105,32 +122,28 @@ class PostgresScoringService:
                     (transaction.card_id,),
                 )
                 latest = connection.execute(
-                    "SELECT occurred_at FROM scored_transactions WHERE card_id = %s "
+                    "SELECT occurred_at, sequence FROM scored_transactions "
+                    "WHERE card_id = %s "
                     "ORDER BY occurred_at DESC, sequence DESC LIMIT 1",
                     (transaction.card_id,),
                 ).fetchone()
                 if latest and transaction.occurred_at < latest["occurred_at"]:
                     raise TransactionConflict("out_of_order_card_transaction")
 
-                calculator = HistoryFeatureCalculator()
-                # 7일보다 오래된 거래는 이번 계산에서 제외하되 원본은 남긴다.
-                start = datetime.min
-                if transaction.occurred_at - start >= AMOUNT_WINDOW:
-                    start = transaction.occurred_at - AMOUNT_WINDOW
-                rows = connection.execute(
-                    "SELECT * FROM scored_transactions "
-                    "WHERE card_id = %s AND occurred_at >= %s "
-                    "ORDER BY occurred_at, sequence",
-                    (transaction.card_id, start),
-                )
-                for row in rows:
-                    calculator.process(stored_transaction(row))
+                calculator = None
+                if latest and self.history_cache is not None:
+                    # DB 잠금 아래에서 마지막 확정 거래 번호와 일치할 때만 사용한다.
+                    calculator = self.history_cache.load(
+                        transaction.card_id, latest["sequence"], latest["occurred_at"]
+                    )
+                if calculator is None:
+                    calculator = self.load_history(connection, transaction)
                 features = calculator.process(transaction)
                 result = evaluate(self.model, transaction, features)
-                connection.execute(
+                saved = connection.execute(
                     "INSERT INTO scored_transactions "
                     "(transaction_id, card_id, occurred_at, amount, category, result) "
-                    "VALUES (%s, %s, %s, %s, %s, %s)",
+                    "VALUES (%s, %s, %s, %s, %s, %s) RETURNING sequence",
                     (
                         transaction.transaction_id,
                         transaction.card_id,
@@ -139,8 +152,13 @@ class PostgresScoringService:
                         transaction.category,
                         Jsonb(asdict(result), dumps=dump_result),
                     ),
-                )
+                ).fetchone()
             # COMMIT 실패도 503으로 바꾸도록 with 바깥에서 응답을 반환한다.
+            if self.history_cache is not None:
+                # 반드시 DB 확정 뒤 발행한다. 늦게 끝난 이전 발행은 Redis가 거부한다.
+                self.history_cache.publish(
+                    transaction.card_id, saved["sequence"], calculator
+                )
             return result
         except psycopg.Error as error:
             raise ScoringUnavailable("database_unavailable") from error
