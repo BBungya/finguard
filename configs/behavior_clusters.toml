@@ -1,0 +1,5 @@
+seed = 42
+workers = 4
+cluster_counts = [3, 5, 8]
+n_init = 10
+silhouette_sample_size = 3000
