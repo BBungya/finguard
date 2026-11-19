@@ -23,31 +23,7 @@ from finguard.baseline_metrics import (
     select_daily,
 )
 from finguard.model_diagnostics import subgroup_errors
-
-
-def behavior_values(history, scaler, cluster, anomaly):
-    known = history[:, 1] > 0
-    groups = np.full(len(history), -1, dtype=int)
-    scores = np.full((len(history), 1), -1.0, dtype=np.float32)
-    if known.any():
-        transformed = scaler.transform(np.log1p(history[known])).astype(
-            cluster.cluster_centers_.dtype, copy=False
-        )
-        groups[known] = cluster.predict(transformed)
-        scores[known, 0] = -anomaly.score_samples(transformed)
-    # 각 군집은 별도 열이다. 번호의 크기로 위험 순서를 학습시키지 않는다.
-    membership = np.eye(cluster.n_clusters + 1, dtype=np.float32)[groups + 1]
-    return groups, membership, scores
-
-
-def variant_inputs(base, membership, scores, name):
-    if name == "cluster":
-        return add_history(base, membership)
-    if name == "anomaly":
-        return add_history(base, scores)
-    if name == "both":
-        return add_history(base, np.column_stack((membership, scores)))
-    return base
+from finguard.model_inputs import behavior_values, variant_inputs
 
 
 def card_impact(frame, scores, reference, budget):

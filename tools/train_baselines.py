@@ -12,14 +12,13 @@ from time import perf_counter
 import joblib
 import numpy as np
 import pandas as pd
-from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from threadpoolctl import threadpool_limits
 from xgboost import XGBClassifier
 
 from finguard.baseline_metrics import choose_threshold, evaluate
+from finguard.model_inputs import inputs, make_preprocessor
 from finguard.transactions import REQUIRED_COLUMNS
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -71,30 +70,6 @@ def load_periods(settings):
     ):
         raise ValueError("입력값이나 사기 라벨을 확인하세요.")
     return parts
-
-
-def inputs(rows):
-    # 카드 번호와 정답은 모델 입력에서 제외한다. 날짜에서는 결제 당시의 시간대만 쓴다.
-    return pd.DataFrame(
-        {
-            "log_amount": np.log1p(rows["amt"]).astype(np.float32),
-            "hour": rows["trans_date_trans_time"].dt.hour,
-            "category": rows["category"],
-        }
-    )
-
-
-def make_preprocessor(categorical_columns=("hour", "category")):
-    return ColumnTransformer(
-        [
-            ("amount", StandardScaler(), ["log_amount"]),
-            (
-                "categories",
-                OneHotEncoder(handle_unknown="ignore", dtype=np.float32),
-                list(categorical_columns),
-            ),
-        ]
-    )
 
 
 def main():
